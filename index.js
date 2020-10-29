@@ -49,6 +49,19 @@ server.get("/api/users", (req, res) => {
     res.status(200).json(resource)
 })
 
+//GET return user with specified id
+server.get("/api/users/:id", (req, res) => {
+    const { id } = req.params
+    let specifiedUser = resource.find(user => user.id === id)
+
+    if(specifiedUser) {
+        res.status(200).json(specifiedUser)
+    } else {
+        res.status(404).json({ message: "user with the specified id not found" })
+    }
+   
+})
+
 const PORT = 5000
 
 server.listen(PORT, () => {
