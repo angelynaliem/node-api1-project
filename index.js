@@ -76,6 +76,21 @@ server.delete("/api/users/:id", (req, res) => {
 })
 
 //PUT updates user with specified id
+server.put("/api/users/:id", (req, res) => {
+    const { id } = req.params
+    const changes = req.body
+
+    let index = resource.findIndex(user => user.id === id)
+
+    if (index !== -1) {
+        changes.id = id
+        resource[index] = changes
+        res.status(200).json(changes)
+    } else {
+        res.status(404).json({ message: "user not found" })
+    }
+})
+
 
 const PORT = 5000
 
