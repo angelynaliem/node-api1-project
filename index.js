@@ -62,6 +62,21 @@ server.get("/api/users/:id", (req, res) => {
    
 })
 
+//DELETE user with specified id
+server.delete("/api/users/:id", (req, res) => {
+    const { id } = req.params
+    const deleted = resource.find((user) => user.id === id)
+
+    if(deleted) {
+        resource = resource.filter((user) => user.id !== id)
+        res.status(200).json(deleted)
+    } else {
+        res.status(404).json({ message: "id not found" })
+    }
+})
+
+//PUT updates user with specified id
+
 const PORT = 5000
 
 server.listen(PORT, () => {
