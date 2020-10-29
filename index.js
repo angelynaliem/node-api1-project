@@ -37,10 +37,19 @@ server.post("/api/users", (req, res) => {
     // }
 
     //Option #2
-    userResource.id = shortid.generate()
-    resource.push(userResource)
+    // userResource.id = shortid.generate()
+    // resource.push(userResource)
 
-    res.status(201).json(userResource)
+    // res.status(201).json(userResource)
+
+    //Option #3
+    if(userResource.name === "" || userResource.bio === "") {
+        res.status(400).json({ message: "Please provide name and bio" })
+    } else {
+        userResource.id = shortid.generate()
+        resource.push(userResource)
+        res.status(201).json(userResource)
+    }
 
 })
 
